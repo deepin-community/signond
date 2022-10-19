@@ -1,0 +1,162 @@
+From ffed8f887e7702f23975d8061f9ebf1a1b4dfd6c Mon Sep 17 00:00:00 2001
+From: Alberto Mardegan <mardy@users.sourceforge.net>
+Date: Thu, 5 Nov 2020 18:49:38 +0300
+Description: Fix tests failing with Qt 5.15
+Origin: upstream, https://gitlab.com/accounts-sso/signond/-/merge_requests/32
+Bug: https://gitlab.com/accounts-sso/signond/-/issues/12
+
+---
+ lib/signond/SignOn/abstract-key-manager.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/signond/SignOn/abstract-key-manager.h b/lib/signond/SignOn/abstract-key-manager.h
+index 78496481..e7268537 100644
+--- a/lib/signond/SignOn/abstract-key-manager.h
++++ b/lib/signond/SignOn/abstract-key-manager.h
+@@ -89,7 +89,7 @@ public:
+      * used or implemented in subclasses.
+      */
+     virtual void authorizeKey(const Key &key,
+-                              const QString &message = QString::null);
++                              const QString &message = QString());
+ 
+     /*!
+      * Signond calls this method when there are no active keys. This might
+-- 
+GitLab
+
+
+From a4529a493a4f0d1ef5ffb0727b4b7226f36651be Mon Sep 17 00:00:00 2001
+From: Alberto Mardegan <mardy@users.sourceforge.net>
+Date: Thu, 5 Nov 2020 18:50:00 +0300
+Subject: [PATCH 2/3] src/signond: fix deprecation warning
+
+---
+ src/signond/credentialsdb.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/signond/credentialsdb.cpp b/src/signond/credentialsdb.cpp
+index 0237bc0a..36ee337a 100644
+--- a/src/signond/credentialsdb.cpp
++++ b/src/signond/credentialsdb.cpp
+@@ -309,7 +309,7 @@ QString SqlDatabase::errorInfo(const QSqlError &error)
+     stream << errType;
+     stream << "\n\tDatabase text: " << error.databaseText();
+     stream << "\n\tDriver text: " << error.driverText();
+-    stream << "\n\tNumber: " << error.number();
++    stream << "\n\tError code: " << error.nativeErrorCode();
+ 
+     return text;
+ }
+-- 
+GitLab
+
+
+From 001a640afbe6473f806fdd4d126f3fd1de8be17c Mon Sep 17 00:00:00 2001
+From: Alberto Mardegan <mardy@users.sourceforge.net>
+Date: Thu, 5 Nov 2020 19:14:42 +0300
+Subject: [PATCH 3/3] tests: use a queued connection to stop the event loop
+
+Under Qt 5.15, some signals that were previously emitted from the event
+loop are now emitted immediately. This was causing the `loop.run()` call
+to hang until the timeout was reached.
+
+By using a queued connection we ensure that the signal will be delivered
+via the event loop.
+
+Fixes: https://gitlab.com/accounts-sso/signond/-/issues/12
+---
+ tests/libsignon-qt-tests/ssotestclient.cpp | 17 +++++++++++------
+ tests/signond-tests/timeouts.cpp           |  6 ++++--
+ 2 files changed, 15 insertions(+), 8 deletions(-)
+
+diff --git a/tests/libsignon-qt-tests/ssotestclient.cpp b/tests/libsignon-qt-tests/ssotestclient.cpp
+index 3ad9de32..619cf9a1 100644
+--- a/tests/libsignon-qt-tests/ssotestclient.cpp
++++ b/tests/libsignon-qt-tests/ssotestclient.cpp
+@@ -293,7 +293,8 @@ void SsoTestClient::storeCredentials()
+ 
+     connect(identity, SIGNAL(credentialsStored(const quint32)),
+             &m_identityResult, SLOT(credentialsStored(const quint32)));
+-    connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
++    connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
++            Qt::QueuedConnection);
+ 
+     identity->storeCredentials();
+ 
+@@ -357,7 +358,8 @@ void SsoTestClient::storeCredentials()
+ 
+         connect(existingIdentity, SIGNAL(credentialsStored(const quint32)),
+                 &m_identityResult, SLOT(credentialsStored(const quint32)));
+-        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
++        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
++                Qt::QueuedConnection);
+ 
+         existingIdentity->storeCredentials(updateInfo);
+         qDebug();
+@@ -372,7 +374,8 @@ void SsoTestClient::storeCredentials()
+ 
+     if (m_identityResult.m_responseReceived == TestIdentityResult::NormalResp) {
+         QEventLoop loop;
+-        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
++        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
++                Qt::QueuedConnection);
+         connect(existingIdentity, SIGNAL(info(const SignOn::IdentityInfo &)),
+                 &m_identityResult, SLOT(info(const SignOn::IdentityInfo &)));
+ 
+@@ -1207,7 +1210,8 @@ void SsoTestClient::queryMethods()
+     connect(&service, SIGNAL(error(const SignOn::Error &)),
+             &m_serviceResult, SLOT(error(const SignOn::Error &)));
+ 
+-    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
++    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
++            Qt::QueuedConnection);
+ 
+     service.queryMethods();
+ 
+@@ -1251,7 +1255,8 @@ void SsoTestClient::queryMechanisms()
+     connect(&service, SIGNAL(error(const SignOn::Error &)),
+             &m_serviceResult, SLOT(error(const SignOn::Error &)));
+ 
+-    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
++    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
++            Qt::QueuedConnection);
+ 
+     service.queryMechanisms(m_methodToQueryMechanisms);
+ 
+@@ -1615,7 +1620,7 @@ void SsoTestClient::emptyPasswordRegression()
+     const char *infoSignature = SIGNAL(info(const SignOn::IdentityInfo &));
+     connect(identity, infoSignature,
+             &m_identityResult, SLOT(info(const SignOn::IdentityInfo &)));
+-    connect(identity, infoSignature, &loop, SLOT(quit()));
++    connect(identity, infoSignature, &loop, SLOT(quit()), Qt::QueuedConnection);
+ 
+     identity->queryInfo();
+ 
+diff --git a/tests/signond-tests/timeouts.cpp b/tests/signond-tests/timeouts.cpp
+index dae8e4ba..9a6bc40a 100644
+--- a/tests/signond-tests/timeouts.cpp
++++ b/tests/signond-tests/timeouts.cpp
+@@ -55,7 +55,8 @@ void TimeoutsTest::identityTimeout()
+ {
+     QEventLoop loop;
+     QTimer::singleShot(test_timeout, &loop, SLOT(quit()));
+-    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()));
++    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()),
++                     Qt::QueuedConnection);
+ 
+     QMap<MethodName,MechanismsList> methods;
+     methods.insert("dummy", QStringList() << "mech1" << "mech2");
+@@ -130,7 +131,8 @@ void TimeoutsTest::identityRegisterTwice()
+ {
+     QEventLoop loop;
+     QTimer::singleShot(test_timeout, &loop, SLOT(quit()));
+-    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()));
++    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()),
++                     Qt::QueuedConnection);
+ 
+     QMap<MethodName,MechanismsList> methods;
+     methods.insert("dummy", QStringList() << "mech1" << "mech2");
+-- 
+GitLab
+

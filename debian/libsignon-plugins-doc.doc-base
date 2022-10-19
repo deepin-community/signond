@@ -1,0 +1,12 @@
+Document: libsignon-plugins-doc
+Title: libsignon-plugins API documentation
+Abstract: This manual contains the Doxygen generated documentation
+ for libsignon-plugins.
+Section: Programming/C++
+
+Format: HTML
+Index: /usr/share/doc/signon-plugins/html/index.html
+Files: /usr/share/doc/signon-plugins/html/*.html
+ /usr/share/doc/signon-plugins/html/*.css
+ /usr/share/doc/signon-plugins/html/*.js
+ /usr/share/doc/signon-plugins/html/*.png

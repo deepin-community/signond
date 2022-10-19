@@ -1,0 +1,30 @@
+--- a/doc/doc.pri
++++ b/doc/doc.pri
+@@ -29,7 +29,6 @@
+                        INPUT=\"$${DOC_INPUT}\" \
+                        QHP_NAMESPACE=\"com.nokia.example.$${TARGET}\" \
+                        QHP_VIRTUAL_FOLDER=\"$${TARGET}\" \
+-                       TAGFILES=\"$$system(pwd)/qt.tags\" \
+                        TAGFILE=\"doc/$${TARGET}.tags\" \
+                        doxygen $$system(pwd)/doxy.conf
+ doctarget.depends    = FORCE
+--- a/lib/SignOn/doc/doc.pri
++++ b/lib/SignOn/doc/doc.pri
+@@ -29,7 +29,6 @@
+                        INPUT=\"$${DOC_INPUT}\" \
+                        QHP_NAMESPACE=\"com.nokia.example.$${TARGET}\" \
+                        QHP_VIRTUAL_FOLDER=\"$${TARGET}\" \
+-                       TAGFILES=\"$$system(pwd)/qt.tags\" \
+                        TAGFILE=\"doc/$${TARGET}.tags\" \
+                        doxygen $$system(pwd)/doxy.conf
+ doctarget.depends    = FORCE
+--- a/lib/plugins/doc/doc.pri
++++ b/lib/plugins/doc/doc.pri
+@@ -29,7 +29,6 @@
+                        INPUT=\"$${DOC_INPUT}\" \
+                        QHP_NAMESPACE=\"com.nokia.example.$${TARGET}\" \
+                        QHP_VIRTUAL_FOLDER=\"$${TARGET}\" \
+-                       TAGFILES=\"$$system(pwd)/qt.tags\" \
+                        TAGFILE=\"doc/$${TARGET}.tags\" \
+                        doxygen $$system(pwd)/doxy.conf
+ doctarget.depends    = FORCE

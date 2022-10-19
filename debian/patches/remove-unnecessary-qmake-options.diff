@@ -1,0 +1,151 @@
+From b97bcd76953e20ccb40d2e32aa51f3f89ebf021e Mon Sep 17 00:00:00 2001
+From: Alberto Mardegan <mardy@users.sourceforge.net>
+Date: Thu, 2 Jul 2020 21:35:12 +0300
+Description: [PATCH] Build: remove unnecessary qmake options
+ All project files include the common-project-config.pri file, which
+ defines the compiler options.
+Origin: upstream, https://gitlab.com/accounts-sso/signond/-/commit/b97bcd76953e20ccb40d2e32aa51f3f89ebf021e
+
+---
+ src/extensions/cryptsetup/cryptsetup.pro        | 2 --
+ src/plugins/plugins.pri                         | 3 ---
+ src/remotepluginprocess/remotepluginprocess.pro | 8 +-------
+ tests/extensions/extensions.pri                 | 4 ----
+ tests/libsignon-qt-tests/libsignon-qt-tests.pro | 5 +----
+ tests/passwordplugintest/passwordplugintest.pro | 5 -----
+ tests/signond-tests/signond-tests.pri           | 6 ------
+ 7 files changed, 2 insertions(+), 31 deletions(-)
+
+diff --git a/src/extensions/cryptsetup/cryptsetup.pro b/src/extensions/cryptsetup/cryptsetup.pro
+index f4b6e53b..d4849c53 100644
+--- a/src/extensions/cryptsetup/cryptsetup.pro
++++ b/src/extensions/cryptsetup/cryptsetup.pro
+@@ -28,8 +28,6 @@ QT += core
+ QT -= gui
+ 
+ QMAKE_CXXFLAGS += \
+-    -fno-exceptions \
+-    -fno-rtti \
+     -fvisibility=hidden
+ 
+ DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
+diff --git a/src/plugins/plugins.pri b/src/plugins/plugins.pri
+index 2c03e743..c5980258 100644
+--- a/src/plugins/plugins.pri
++++ b/src/plugins/plugins.pri
+@@ -22,9 +22,6 @@ LIBS += -lsignon-plugins
+ QMAKE_LIBDIR += \
+     $${TOP_BUILD_DIR}/lib/plugins
+ 
+-QMAKE_CXXFLAGS += -fno-exceptions \
+-    -fno-rtti
+-
+ headers.path = $${INSTALL_PREFIX}/include/signon-plugins
+ 
+ pkgconfig.path = $${INSTALL_LIBDIR}/pkgconfig
+diff --git a/src/remotepluginprocess/remotepluginprocess.pro b/src/remotepluginprocess/remotepluginprocess.pro
+index 7c2ea007..54cef50d 100644
+--- a/src/remotepluginprocess/remotepluginprocess.pro
++++ b/src/remotepluginprocess/remotepluginprocess.pro
+@@ -23,8 +23,7 @@ INCLUDEPATH += . \
+                $$TOP_SRC_DIR/lib
+ 
+ CONFIG += \
+-    build_all \
+-    link_pkgconfig
++    build_all
+ 
+ lessThan(QT_VERSION, "5.5.0"):system($$pkgConfigExecutable() --exists libproxy-1.0) {
+     DEFINES += HAVE_LIBPROXY
+@@ -40,11 +39,6 @@ LIBS += \
+     -lsignon-plugins-common \
+     -lsignon-plugins
+ 
+-QMAKE_CXXFLAGS += -fno-exceptions \
+-                  -fno-rtti
+-
+-#DEFINES += QT_NO_CAST_TO_ASCII \
+-#    QT_NO_CAST_FROM_ASCII
+ DEFINES += SIGNON_PLUGIN_TRACE
+ DEFINES += "SIGNOND_PLUGINS_DIR=$${SIGNOND_PLUGINS_DIR_QUOTED}"
+ 
+diff --git a/tests/extensions/extensions.pri b/tests/extensions/extensions.pri
+index 179cd28d..d4f9c1d4 100644
+--- a/tests/extensions/extensions.pri
++++ b/tests/extensions/extensions.pri
+@@ -18,7 +18,3 @@ DEFINES += SIGNON_PLUGIN_TRACE
+ 
+ INCLUDEPATH += . \
+     $$TOP_SRC_DIR/lib/signond
+-
+-QMAKE_CXXFLAGS += \
+-    -fno-exceptions \
+-    -fno-rtti
+diff --git a/tests/libsignon-qt-tests/libsignon-qt-tests.pro b/tests/libsignon-qt-tests/libsignon-qt-tests.pro
+index 43f2d59f..4dd6ce40 100644
+--- a/tests/libsignon-qt-tests/libsignon-qt-tests.pro
++++ b/tests/libsignon-qt-tests/libsignon-qt-tests.pro
+@@ -3,8 +3,7 @@ include( ../tests.pri )
+ TARGET = libsignon-qt-tests
+ 
+ CONFIG += \
+-    build_all \
+-    link_pkgconfig
++    build_all
+ QT += \
+     core \
+     dbus \
+@@ -36,8 +35,6 @@ INCLUDEPATH += . \
+     $$TOP_SRC_DIR/src/plugins/test
+ DEFINES += SSO_CI_TESTMANAGEMENT
+ DEFINES += "SIGNOND_PLUGINS_DIR=$${SIGNOND_PLUGINS_DIR_QUOTED}"
+-QMAKE_CXXFLAGS += -fno-exceptions \
+-    -fno-rtti
+ 
+ check.depends = $$TARGET
+ check.commands = "SSO_PLUGINS_DIR=$${TOP_BUILD_DIR}/src/plugins/test SSO_EXTENSIONS_DIR=$${TOP_BUILD_DIR}/non-existing-dir $$RUN_WITH_SIGNOND ./libsignon-qt-tests"
+diff --git a/tests/passwordplugintest/passwordplugintest.pro b/tests/passwordplugintest/passwordplugintest.pro
+index 6132921e..6e53433b 100644
+--- a/tests/passwordplugintest/passwordplugintest.pro
++++ b/tests/passwordplugintest/passwordplugintest.pro
+@@ -3,8 +3,6 @@ TARGET = signon-passwordplugin-tests
+ QT += core \
+     network \
+     testlib
+-CONFIG += \
+-    link_pkgconfig
+ 
+ DEFINES += SIGNON_PLUGIN_TRACE
+ 
+@@ -18,6 +16,3 @@ INCLUDEPATH += $${TOP_SRC_DIR}/lib/plugins \
+     $${TOP_SRC_DIR}/src/plugins/password \
+     $${TOP_SRC_DIR}/src/plugins \
+     $${TOP_SRC_DIR}/lib
+-
+-QMAKE_CXXFLAGS += -fno-exceptions \
+-    -fno-rtti
+diff --git a/tests/signond-tests/signond-tests.pri b/tests/signond-tests/signond-tests.pri
+index 1bbd5a15..cbdfae3c 100644
+--- a/tests/signond-tests/signond-tests.pri
++++ b/tests/signond-tests/signond-tests.pri
+@@ -1,8 +1,5 @@
+ include(../tests.pri)
+ 
+-CONFIG += \
+-    link_pkgconfig
+-
+ QT += core \
+     sql \
+     testlib \
+@@ -34,8 +31,5 @@ INCLUDEPATH += . \
+     $${TOP_SRC_DIR}/lib/plugins/signon-plugins-common/SignOn \
+     $${TOP_SRC_DIR}/lib \
+ 
+-QMAKE_CXXFLAGS += -fno-exceptions \
+-    -fno-rtti
+-
+ check.depends = $$TARGET
+ check.commands = "SSO_PLUGINS_DIR=$${TOP_BUILD_DIR}/src/plugins/test SSO_EXTENSIONS_DIR=$${TOP_BUILD_DIR}/non-existing-dir $$RUN_WITH_SIGNOND ./$$TARGET"
+-- 
+GitLab
+

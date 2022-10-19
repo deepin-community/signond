@@ -1,0 +1,4 @@
+# signond command has no command line arguments
+signond: no-manual-page usr/bin/signond
+# signonpluginprocess command has no command line arguments
+signond: no-manual-page usr/bin/signonpluginprocess

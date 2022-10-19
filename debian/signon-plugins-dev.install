@@ -1,0 +1,6 @@
+usr/include/signon-plugins/
+usr/lib/*/libsignon-plugins-common.so
+usr/lib/*/libsignon-plugins.so
+usr/lib/*/pkgconfig/signon-plugins-common.pc
+usr/lib/*/pkgconfig/signon-plugins.pc
+usr/share/doc/signon-plugins-dev/example/

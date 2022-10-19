@@ -1,0 +1,4 @@
+usr/lib/*/libsignon-plugins-common.so.1
+usr/lib/*/libsignon-plugins-common.so.1*
+usr/lib/*/libsignon-plugins.so.1
+usr/lib/*/libsignon-plugins.so.1.*

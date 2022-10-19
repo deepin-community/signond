@@ -1,0 +1,12 @@
+Document: signond-doc
+Title: signond API documentation
+Abstract: This manual contains the Doxygen generated documentation
+ for signond.
+Section: Programming/C++
+
+Format: HTML
+Index: /usr/share/doc/signon/html/index.html
+Files: /usr/share/doc/signon/html/*.html
+ /usr/share/doc/signon/html/*.css
+ /usr/share/doc/signon/html/*.js
+ /usr/share/doc/signon/html/*.png

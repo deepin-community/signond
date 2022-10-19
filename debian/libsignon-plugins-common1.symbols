@@ -1,0 +1,87 @@
+# SymbolsHelper-Confirmed: 8.60 amd64 armel armhf ia64
+libsignon-plugins-common.so.1 libsignon-plugins-common1 #MINVER#
+* Build-Depends-Package: signond-plugins-dev
+ _Z23expandDBusArgumentValueRK8QVariantPb@Base 8.57+20150423
+ (arch=amd64 ia64)_ZN10QByteArrayD1Ev@Base 8.60-4
+ (arch=amd64 ia64)_ZN10QByteArrayD2Ev@Base 8.60-4
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperI13QDBusArgumentLb1EE8DestructEPv@Base 8.57+20150423
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperI13QDBusArgumentLb1EE9ConstructEPvPKv@Base 8.57+20150423
+ (optional=templinst)_ZN4QMapI7QString8QVariantE13detach_helperEv@Base 8.57+20150423
+ (optional=templinst)_ZN4QMapI7QString8QVariantED1Ev@Base 8.60
+ (optional=templinst)_ZN4QMapI7QString8QVariantED2Ev@Base 8.60
+ _ZN6SignOn13BlobIOHandler11qt_metacallEN11QMetaObject4CallEiPPv@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler11qt_metacastEPKc@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler11receiveDataEi@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler12dataReceivedERK4QMapI7QString8QVariantE@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler13pageByteArrayERK10QByteArray@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler16staticMetaObjectE@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler21byteArrayToVariantMapERK10QByteArray@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler21variantMapToByteArrayERK4QMapI7QString8QVariantE@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler26setReadNotificationEnabledEb@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler28setReadChannelSocketNotifierEP15QSocketNotifier@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler5errorEv@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler8readBlobEv@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandler8sendDataERK4QMapI7QString8QVariantE@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandlerC1EP9QIODeviceS2_P7QObject@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandlerC2EP9QIODeviceS2_P7QObject@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandlerD0Ev@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandlerD1Ev@Base 8.57+20150423
+ _ZN6SignOn13BlobIOHandlerD2Ev@Base 8.57+20150423
+ (arch=amd64 ia64)_ZN7QStringD1Ev@Base 8.60-4
+ (arch=amd64 ia64)_ZN7QStringD2Ev@Base 8.60-4
+ (optional=templinst)_ZN7QVectorI10QByteArrayE6appendERKS0_@Base 8.57+20150423
+ (optional=templinst)_ZN7QVectorI10QByteArrayE7reallocEi6QFlagsIN10QArrayData16AllocationOptionEE@Base 8.60
+ (optional=templinst|arch=amd64)_ZN7QVectorI10QByteArrayED1Ev@Base 8.60-4
+ (optional=templinst|arch=amd64)_ZN7QVectorI10QByteArrayED2Ev@Base 8.60-4
+ (optional=templinst)_ZN8QMapNodeI7QString8QVariantE14destroySubTreeEv@Base 8.57+20150423
+ (optional=private)_ZN9QtPrivate16StreamStateSaverD1Ev@Base 8.60-4
+ (optional=private)_ZN9QtPrivate16StreamStateSaverD2Ev@Base 8.60-4
+ _ZNK6SignOn13BlobIOHandler10metaObjectEv@Base 8.57+20150423
+ (optional=templinst)_ZNK8QMapNodeI7QString8QVariantE4copyEP8QMapDataIS0_S1_E@Base 8.57+20150423
+ _ZTIN6SignOn13BlobIOHandlerE@Base 8.60
+ _ZTSN6SignOn13BlobIOHandlerE@Base 8.60
+ _ZTVN6SignOn13BlobIOHandlerE@Base 8.57+20150423
+ (optional=templinst)_ZZN11QMetaTypeIdI13QDBusArgumentE14qt_metatype_idEvE11metatype_id@Base 8.57+20150423
+libsignon-plugins.so.1 libsignon-plugins-common1 #MINVER#
+ (arch=amd64 ia64)_ZN10QByteArrayD1Ev@Base 8.60-4
+ (arch=amd64 ia64)_ZN10QByteArrayD2Ev@Base 8.60-4
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn11SessionDataELb1EE8DestructEPv@Base 8.57+20150423
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn11SessionDataELb1EE9ConstructEPvPKv@Base 8.57+20150423
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn13UiSessionDataELb1EE8DestructEPv@Base 8.57+20150423
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn13UiSessionDataELb1EE9ConstructEPvPKv@Base 8.57+20150423
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn5ErrorELb1EE8DestructEPv@Base 8.57+20150423
+ (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn5ErrorELb1EE9ConstructEPvPKv@Base 8.57+20150423
+ _ZN19AuthPluginInterface11qt_metacallEN11QMetaObject4CallEiPPv@Base 8.57+20150423
+ _ZN19AuthPluginInterface11qt_metacastEPKc@Base 8.57+20150423
+ _ZN19AuthPluginInterface13statusChangedE15AuthPluginStateRK7QString@Base 8.57+20150423
+ _ZN19AuthPluginInterface16staticMetaObjectE@Base 8.57+20150423
+ _ZN19AuthPluginInterface18userActionFinishedERKN6SignOn13UiSessionDataE@Base 8.57+20150423
+ _ZN19AuthPluginInterface18userActionRequiredERKN6SignOn13UiSessionDataE@Base 8.57+20150423
+ _ZN19AuthPluginInterface5abortEv@Base 8.57+20150423
+ _ZN19AuthPluginInterface5errorERKN6SignOn5ErrorE@Base 8.57+20150423
+ _ZN19AuthPluginInterface5storeERKN6SignOn11SessionDataE@Base 8.57+20150423
+ _ZN19AuthPluginInterface6cancelEv@Base 8.57+20150423
+ _ZN19AuthPluginInterface6resultERKN6SignOn11SessionDataE@Base 8.57+20150423
+ _ZN19AuthPluginInterface7refreshERKN6SignOn13UiSessionDataE@Base 8.57+20150423
+ _ZN19AuthPluginInterface9refreshedERKN6SignOn13UiSessionDataE@Base 8.57+20150423
+ (optional=templinst)_ZN4QMapI7QString8QVariantEC1ERKS2_@Base 8.60-4
+ (optional=templinst)_ZN4QMapI7QString8QVariantEC2ERKS2_@Base 8.60-4
+ (optional=templinst)_ZN4QMapI7QString8QVariantED1Ev@Base 8.60
+ (optional=templinst)_ZN4QMapI7QString8QVariantED2Ev@Base 8.60
+ _ZN6SignOn5ErrorD0Ev@Base 8.57+20150423
+ _ZN6SignOn5ErrorD1Ev@Base 8.57+20150423
+ _ZN6SignOn5ErrorD2Ev@Base 8.57+20150423
+ (arch=amd64 ia64)_ZN7QStringD1Ev@Base 8.60-4
+ (arch=amd64 ia64)_ZN7QStringD2Ev@Base 8.60-4
+ (optional=templinst)_ZN8QMapNodeI7QString8QVariantE14destroySubTreeEv@Base 8.57+20150423
+ _ZNK19AuthPluginInterface10metaObjectEv@Base 8.57+20150423
+ (optional=templinst)_ZNK8QMapNodeI7QString8QVariantE4copyEP8QMapDataIS0_S1_E@Base 8.57+20150423
+ _ZTI19AuthPluginInterface@Base 8.60
+ _ZTIN6SignOn5ErrorE@Base 8.60
+ _ZTS19AuthPluginInterface@Base 8.60
+ _ZTSN6SignOn5ErrorE@Base 8.60
+ _ZTV19AuthPluginInterface@Base 8.57+20150423
+ _ZTVN6SignOn5ErrorE@Base 8.57+20150423
+ (optional=templinst)_ZZN11QMetaTypeIdIN6SignOn11SessionDataEE14qt_metatype_idEvE11metatype_id@Base 8.57+20150423
+ (optional=templinst)_ZZN11QMetaTypeIdIN6SignOn13UiSessionDataEE14qt_metatype_idEvE11metatype_id@Base 8.57+20150423
+ (optional=templinst)_ZZN11QMetaTypeIdIN6SignOn5ErrorEE14qt_metatype_idEvE11metatype_id@Base 8.57+20150423

@@ -1,0 +1,164 @@
+Source: signond
+Section: utils
+Priority: optional
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Uploaders: Diane Trout <diane@debian.org>,
+           Scarlett Moore <sgmoore@kde.org>
+Build-Depends: dbus-test-runner <!nocheck>,
+               debhelper-compat (= 13),
+               doxygen,
+               graphviz,
+               libdbus-1-dev,
+               libproxy-dev,
+               libqt5sql5-sqlite,
+               pkg-config,
+               pkg-kde-tools (>= 0.14),
+               qt5-qmake,
+               qtbase5-dev,
+               qttools5-dev-tools
+Standards-Version: 4.5.0
+Homepage: https://gitlab.com/accounts-sso/signond
+Vcs-Browser: https://salsa.debian.org/qt-kde-team/extras/signond
+Vcs-Git: https://salsa.debian.org/qt-kde-team/extras/signond.git
+Rules-Requires-Root: no
+
+Package: libsignon-extension1
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Single Sign On framework - extension shared library
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ This package contains extension shared libraries to be used by applications.
+
+Package: libsignon-plugins-common1
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Single Sign On framework - plugins common shared library
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ This package contains plugin shared libraries to be used by applications.
+
+Package: libsignon-plugins-doc
+Section: doc
+Architecture: all
+Built-Using: doxygen (= ${signond:DoxygenVersion})
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Single Sign On framework - plugins documentation
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ This package contains the documentation for libsignon-plugins-dev.
+
+Package: libsignon-qt-doc
+Section: doc
+Architecture: all
+Built-Using: doxygen (= ${signond:DoxygenVersion})
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Single Sign On framework - documentation for Qt API
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ This package contains the documentation for libsignon-qt.
+
+Package: libsignon-qt5-1
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Single Sign On framework - qt5 shared libraries
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ This package contains Qt5 shared libraries to be used by applications.
+
+Package: libsignon-qt5-dev
+Section: libdevel
+Architecture: any
+Depends: libsignon-qt5-1 (= ${binary:Version}), qtbase5-dev, ${misc:Depends}
+Multi-Arch: same
+Description: Single Sign On framework - qt5 development files
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ Headers and static libraries for the libsignon-qt5 library.
+
+Package: signon-plugin-password
+Section: libs
+Architecture: any
+Depends: signond, ${misc:Depends}, ${shlibs:Depends}
+Replaces: signon-passwordplugin
+Conflicts: signon-passwordplugin
+Description: Single Sign On framework - Plain Password plugin
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ Password plugin for Single Sign On.
+
+Package: signon-plugin-ssotest
+Section: libs
+Architecture: any
+Depends: signond, ${misc:Depends}, ${shlibs:Depends}
+Description: Single Sign On framework - Test plugin
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ Test plugin for Single Sign On.
+
+Package: signon-plugins-dev
+Section: libdevel
+Architecture: any
+Breaks: signond-dev (<< 8.60~)
+Replaces: signond-dev (<< 8.60~)
+Depends: libsignon-plugins-common1 (= ${binary:Version}),
+         libsignon-qt5-dev,
+         ${misc:Depends}
+Multi-Arch: same
+Description: Single Sign On framework - plugins development files
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ Headers and static libraries for Single Sign On plugin development.
+
+Package: signond
+Architecture: any
+Depends: libqt5sql5-sqlite, ${misc:Depends}, ${shlibs:Depends}
+Breaks: signon-plugins, signon-saslplugin (<< 8.40)
+Replaces: signon-plugins, signon-saslplugin (<< 8.40)
+Recommends: signon-ui
+Description: Single Sign On framework
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ Framework to provide credential storage and authentication service.
+
+Package: signond-dev
+Section: libdevel
+Architecture: any
+Depends: qtbase5-dev, signond (= ${binary:Version}), ${misc:Depends}
+Breaks: signon-saslplugin-dev (<< 8.40)
+Replaces: signon-saslplugin-dev (<< 8.40)
+Description: Single Sign On framework - development files
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ Common headers and DBUS interfaces definition files for the Signon Framework.
+
+Package: signond-doc
+Section: doc
+Architecture: all
+Built-Using: doxygen (= ${signond:DoxygenVersion})
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Single Sign On framework - documentation for daemon
+ Accounts and SSO (Single Sign-On) framework for Linux and POSIX based
+ platforms.
+ .
+ This package contains the documentation for signond-dev.

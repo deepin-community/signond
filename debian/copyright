@@ -1,0 +1,86 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: signond
+Upstream-Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+Source: https://gitlab.com/accounts-sso/signond.git
+
+Files: *
+Copyright: 2011-2016, Canonical Ltd
+           2011, Intel Corporation
+           2009-2010, Nokia Corporation
+           2018, elementary, Inc
+License: LGPL-2.1
+
+Files: src/remotepluginprocess/my-network-proxy-factory.cpp
+Copyright: 2012, Nokia Corporation and/or its subsidiary(-ies)
+License: GPL-3 or LGPL-2.1-QTexception-1.1
+ $QT_BEGIN_LICENSE:LGPL$
+ GNU Lesser General Public License Usage
+ This file may be used under the terms of the GNU Lesser General Public
+ License version 2.1 as published by the Free Software Foundation and
+ appearing in the file LICENSE.LGPL included in the packaging of this
+ file. Please review the following information to ensure the GNU Lesser
+ General Public License version 2.1 requirements will be met:
+ http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ .
+ In addition, as a special exception, Nokia gives you certain additional
+ rights. These rights are described in the Nokia Qt LGPL Exception
+ version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+ .
+ GNU General Public License Usage
+ Alternatively, this file may be used under the terms of the GNU General
+ Public License version 3.0 as published by the Free Software Foundation
+ and appearing in the file LICENSE.GPL included in the packaging of this
+ file. Please review the following information to ensure the GNU General
+ Public License version 3.0 requirements will be met:
+ http://www.gnu.org/copyleft/gpl.html.
+ .
+ Other Usage
+ Alternatively, this file may be used in accordance with the terms and
+ conditions contained in a signed written agreement between you and Nokia.
+ .
+ .
+ .
+ .
+ .
+ .
+ $QT_END_LICENSE$
+
+Files: debian/*
+Copyright: 2011-2013 Ken VanDine <ken.vandine@canonical.com>
+    2019, 2020 Scarlett Moore <sgmoore@kde.org>
+License: GPL-2+
+
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License: LGPL-2.1
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public License
+ version 2.1 as published by the Free Software Foundation.
+ .
+ This library is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ 02110-1301 USA
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public License
+ version 2.1 can be found in `/usr/share/common-licenses/LGPL-2.1'.

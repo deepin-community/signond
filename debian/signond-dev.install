@@ -1,0 +1,5 @@
+usr/include/signon-extension/
+usr/include/signond/
+usr/lib/*/libsignon-extension.so
+usr/lib/*/pkgconfig/SignOnExtension.pc
+usr/lib/*/pkgconfig/signond.pc

@@ -1,0 +1,12 @@
+Document: libsignon-qt-doc
+Title: libsignon-qt API documentation
+Abstract: This manual contains the Doxygen generated documentation
+ for libsignon-qt.
+Section: Programming/C++
+
+Format: HTML
+Index: /usr/share/doc/libsignon-qt/html/index.html
+Files: /usr/share/doc/libsignon-qt/html/*.html
+ /usr/share/doc/libsignon-qt/html/*.css
+ /usr/share/doc/libsignon-qt/html/*.js
+ /usr/share/doc/libsignon-qt/html/*.png
