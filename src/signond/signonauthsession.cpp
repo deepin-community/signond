@@ -23,7 +23,6 @@
 
 #include "signond-common.h"
 #include "signonauthsession.h"
-#include "signonauthsessionadaptor.h"
 
 using namespace SignonDaemonNS;
 
@@ -33,8 +32,6 @@ SignonAuthSession::SignonAuthSession(SignonSessionCore *core,
     m_ownerPid(ownerPid)
 {
     TRACE();
-
-    (void)new SignonAuthSessionAdaptor(this);
 
     static quint32 incr = 0;
     QString objectName = SIGNOND_DAEMON_OBJECTPATH +
@@ -97,16 +94,16 @@ SignonAuthSession::queryAvailableMechanisms(const QStringList &wantedMechanisms)
     return parent()->queryAvailableMechanisms(wantedMechanisms);
 }
 
-QVariantMap SignonAuthSession::process(const QVariantMap &sessionDataVa,
-                                       const QString &mechanism)
+void SignonAuthSession::process(const QVariantMap &sessionDataVa,
+                                const QString &mechanism,
+                                const PeerContext &peerContext,
+                                const ProcessCb &callback)
 {
-    setDelayedReply(true);
-    parent()->process(connection(),
-                      message(),
+    parent()->process(peerContext,
                       sessionDataVa,
                       mechanism,
-                      objectName());
-    return QVariantMap();
+                      objectName(),
+                      callback);
 }
 
 void SignonAuthSession::cancel()

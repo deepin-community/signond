@@ -22,9 +22,6 @@ LIBS += -lsignon-plugins
 QMAKE_LIBDIR += \
     $${TOP_BUILD_DIR}/lib/plugins
 
-QMAKE_CXXFLAGS += -fno-exceptions \
-    -fno-rtti
-
 headers.path = $${INSTALL_PREFIX}/include/signon-plugins
 
 pkgconfig.path = $${INSTALL_LIBDIR}/pkgconfig

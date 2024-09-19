@@ -6,7 +6,7 @@ set -e
 
 # start a local signond
 
-export HOME="$(mktemp -d --tmpdir signond-tests-XXXXXX)"
+export HOME="$(mktemp -d -p /tmp signond-tests-XXXXXX)"
 export SSO_LOGGING_LEVEL=2
 export SSO_STORAGE_PATH="${HOME}"
 export SSO_DAEMON_TIMEOUT=5

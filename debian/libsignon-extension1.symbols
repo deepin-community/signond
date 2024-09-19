@@ -1,8 +1,6 @@
-# SymbolsHelper-Confirmed: 8.60 amd64 armel armhf
+# SymbolsHelper-Confirmed: 8.61 amd64
 libsignon-extension.so.1 libsignon-extension1 #MINVER#
 * Build-Depends-Package: signond-dev
- (arch=amd64)_ZN10QByteArrayD1Ev@Base 8.60-4
- (arch=amd64)_ZN10QByteArrayD2Ev@Base 8.60-4
  _ZN6SignOn10KeyHandler10initializeEPNS_21AbstractCryptoManagerERK5QListIPNS_18AbstractKeyManagerEE@Base 8.57+20150423
  _ZN6SignOn10KeyHandler10keyRemovedE10QByteArray@Base 8.57+20150423
  _ZN6SignOn10KeyHandler11keyDisabledE10QByteArray@Base 8.57+20150423
@@ -120,8 +118,6 @@ libsignon-extension.so.1 libsignon-extension1 #MINVER#
  _ZN6SignOn28AbstractAccessControlManagerD0Ev@Base 8.57+20150423
  _ZN6SignOn28AbstractAccessControlManagerD1Ev@Base 8.57+20150423
  _ZN6SignOn28AbstractAccessControlManagerD2Ev@Base 8.57+20150423
- (arch=amd64)_ZN7QStringD1Ev@Base 8.60-4
- (arch=amd64)_ZN7QStringD2Ev@Base 8.60-4
  _ZNK6SignOn10KeyHandler10metaObjectEv@Base 8.57+20150423
  _ZNK6SignOn10KeyHandler12insertedKeysEv@Base 8.57+20150423
  _ZNK6SignOn10KeyHandler13cryptoManagerEv@Base 8.57+20150423

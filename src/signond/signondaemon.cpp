@@ -118,7 +118,7 @@ void SignonDaemonConfiguration::load()
         QString storagePath = QDir(cfgStoragePath).path();
         m_camConfiguration.setStoragePath(storagePath);
     } else {
-        QString xdgConfigHome = QLatin1String(qgetenv("XDG_CONFIG_HOME"));
+        QString xdgConfigHome = QString::fromLocal8Bit(qgetenv("XDG_CONFIG_HOME"));
         if (xdgConfigHome.isEmpty())
             xdgConfigHome = QDir::homePath() + QLatin1String("/.config");
         m_camConfiguration.setStoragePath(xdgConfigHome +
@@ -532,7 +532,7 @@ void SignonDaemon::watchIdentity(SignonIdentity *identity)
     }
 }
 
-QObject *SignonDaemon::registerNewIdentity()
+SignonIdentity *SignonDaemon::registerNewIdentity()
 {
     clearLastError();
 
@@ -561,8 +561,8 @@ int SignonDaemon::authSessionTimeout() const
                                      m_configuration->authSessionTimeout());
 }
 
-QObject *SignonDaemon::getIdentity(const quint32 id,
-                                   QVariantMap &identityData)
+SignonIdentity *SignonDaemon::getIdentity(const quint32 id,
+                                          QVariantMap &identityData)
 {
     clearLastError();
 
@@ -703,9 +703,9 @@ bool SignonDaemon::clear()
     return true;
 }
 
-QObject *SignonDaemon::getAuthSession(const quint32 id,
-                                      const QString type,
-                                      pid_t ownerPid)
+SignonAuthSession *SignonDaemon::getAuthSession(const quint32 id,
+                                                const QString type,
+                                                pid_t ownerPid)
 {
     clearLastError();
 

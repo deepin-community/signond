@@ -23,8 +23,7 @@ INCLUDEPATH += . \
                $$TOP_SRC_DIR/lib
 
 CONFIG += \
-    build_all \
-    link_pkgconfig
+    build_all
 
 lessThan(QT_VERSION, "5.5.0"):system($$pkgConfigExecutable() --exists libproxy-1.0) {
     DEFINES += HAVE_LIBPROXY
@@ -40,11 +39,6 @@ LIBS += \
     -lsignon-plugins-common \
     -lsignon-plugins
 
-QMAKE_CXXFLAGS += -fno-exceptions \
-                  -fno-rtti
-
-#DEFINES += QT_NO_CAST_TO_ASCII \
-#    QT_NO_CAST_FROM_ASCII
 DEFINES += SIGNON_PLUGIN_TRACE
 DEFINES += "SIGNOND_PLUGINS_DIR=$${SIGNOND_PLUGINS_DIR_QUOTED}"
 

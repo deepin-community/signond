@@ -1,8 +1,6 @@
-# SymbolsHelper-Confirmed: 8.60 amd64 armel armhf
+# SymbolsHelper-Confirmed: 8.61 amd64 i386
 libsignon-qt5.so.1 libsignon-qt5-1 #MINVER#
 * Build-Depends-Package: libsignond-qt5-dev
- (arch=amd64)_ZN10QByteArrayD1Ev@Base 8.60-4
- (arch=amd64)_ZN10QByteArrayD2Ev@Base 8.60-4
  _ZN6SignOn11AuthService10identitiesERK5QListINS_12IdentityInfoEE@Base 8.57+20150423
  _ZN6SignOn11AuthService11qt_metacallEN11QMetaObject4CallEiPPv@Base 8.57+20150423
  _ZN6SignOn11AuthService11qt_metacastEPKc@Base 8.57+20150423
@@ -127,7 +125,7 @@ libsignon-qt5.so.1 libsignon-qt5-1 #MINVER#
  _ZNK6SignOn15SecurityContext18applicationContextEv@Base 8.60
  _ZNK6SignOn8Identity10metaObjectEv@Base 8.57+20150423
  _ZNK6SignOn8Identity2idEv@Base 8.57+20150423
- _ZNK7QString7sectionE5QCharii6QFlagsINS_11SectionFlagEE@Base 8.60-4
+ _ZNK7QString7sectionE5QCharii6QFlagsINS_11SectionFlagEE@Base 8.61
  _ZTIN6SignOn11AuthServiceE@Base 8.60
  _ZTIN6SignOn11AuthSessionE@Base 8.60
  _ZTIN6SignOn5ErrorE@Base 8.60

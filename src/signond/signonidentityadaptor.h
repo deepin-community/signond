@@ -24,15 +24,15 @@
 #ifndef SIGNONIDENTITYADAPTOR_H
 #define SIGNONIDENTITYADAPTOR_H
 
-#include <QDBusAbstractAdaptor>
 #include <QDBusContext>
+#include <QObject>
 
 #include "signond-common.h"
 #include "signonidentity.h"
 
 namespace SignonDaemonNS {
 
-class SignonIdentityAdaptor : public QDBusAbstractAdaptor
+class SignonIdentityAdaptor : public QObject, protected QDBusContext
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface",
@@ -41,9 +41,6 @@ class SignonIdentityAdaptor : public QDBusAbstractAdaptor
 public:
     SignonIdentityAdaptor(SignonIdentity *parent);
     virtual ~SignonIdentityAdaptor();
-
-    inline const QDBusContext &parentDBusContext() const
-        { return *static_cast<QDBusContext *>(m_parent); }
 
 public Q_SLOTS:
     quint32 requestCredentialsUpdate(const QString &message);

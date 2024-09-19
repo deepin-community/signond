@@ -121,7 +121,9 @@ public:
      * @return reference to this object
      */
     SessionData &operator+=(const SessionData &other) {
-        m_data.unite(other.m_data);
+        for (auto it = other.m_data.constBegin(), itEnd = other.m_data.constEnd(); it != itEnd; ++it) {
+            m_data[it.key()] = it.value();
+        }
         return *this;
     }
 

@@ -13,8 +13,6 @@ RCC_DIR         = resources
 
 # we don't like warnings...
 QMAKE_CXXFLAGS -= -Werror -Wno-write-strings
-# Disable RTTI
-QMAKE_CXXFLAGS += -fno-rtti
 # Disable exceptions
 CONFIG += exceptions_off
 # Use C++11
