@@ -1,8 +1,12 @@
-signond (8.60-4) UNRELEASED; urgency=medium
+signond (8.60-4deepin0) unstable; urgency=medium
 
+  [ Debian Qt/KDE Maintainers ]
   * update
 
- -- Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>  Mon, 06 Jun 2022 19:26:24 +0800
+  [ Tianyu Chen ]
+  * No source change upload against GCC 12.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 20 Sep 2024 12:18:33 +0800
 
 signond (8.60-4) unstable; urgency=medium
 
