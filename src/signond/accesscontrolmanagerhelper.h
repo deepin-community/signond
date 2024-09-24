@@ -33,10 +33,7 @@
 #ifndef ACCESSCONTROLMANAGERHELPER_H
 #define ACCESSCONTROLMANAGERHELPER_H
 
-#include <QDBusConnection>
-#include <QDBusContext>
-#include <QDBusMessage>
-
+#include "peercontext.h"
 #include "signonauthsession.h"
 #include "SignOn/abstract-access-control-manager.h"
 
@@ -69,102 +66,84 @@ public:
      * @param peerContext, the context, which process id we want to know
      * @returns process id of service client.
      */
-    static pid_t pidOfPeer(const QDBusContext &peerContext);
-    static pid_t pidOfPeer(const QDBusConnection &peerConnection,
-                           const QDBusMessage &peerMessage);
+    static pid_t pidOfPeer(const PeerContext &peerContext);
 
     /* creating an instance of a class */
     static AccessControlManagerHelper *instance();
 
     /*!
      * Checks if a client process is allowed to use a specific SignonIdentity.
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @param identityId, the SignonIdentity to be used.
      * @returns true, if the peer is allowed, false otherwise.
      */
-    bool isPeerAllowedToUseIdentity(const QDBusConnection &peerConnection,
-                                    const QDBusMessage &peerMessage,
+    bool isPeerAllowedToUseIdentity(const PeerContext &peerContext,
                                     const quint32 identityId);
 
     /*!
      * Checks if a specific process is the owner of a SignonIdentity, thus
      * having full control over it.
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @param identityId, the SignonIdentity in context.
      * @retval ApplicationIsOwner/ApplicationIsNotOwner if the identity
      * is/isn't the owner or IdentityDoesNotHaveOwner if the identity does not
      * have an owner at all.
      */
-    IdentityOwnership isPeerOwnerOfIdentity(const QDBusConnection &peerConnection,
-                                            const QDBusMessage &peerMessage,
+    IdentityOwnership isPeerOwnerOfIdentity(const PeerContext &peerContext,
                                             const quint32 identityId);
 
     /*!
      * Checks if a specific process is allowed to use the SignonAuthSession
      * functionality.
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @param authSession, the authentication session to be used by the peer
      * request.
      * @returns true, if the peer is allowed, false otherwise.
      */
-    bool isPeerAllowedToUseAuthSession(const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage,
+    bool isPeerAllowedToUseAuthSession(const PeerContext &peerContext,
                                        const SignonAuthSession &authSession)
     {
-        return isPeerAllowedToUseIdentity(peerConnection, peerMessage,
-                                          authSession.id());
+        return isPeerAllowedToUseIdentity(peerContext, authSession.id());
     }
 
     /*!
      * Checks if a specific process is allowed to use the SignonAuthSession
      * functionality.
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @param ownerIdentityId, id of the Identity owning the authentication
      * session.
      * @returns true, if the peer is allowed, false otherwise.
      */
-    bool isPeerAllowedToUseAuthSession(const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage,
+    bool isPeerAllowedToUseAuthSession(const PeerContext &peerContext,
                                        const quint32 ownerIdentityId)
     {
-        return isPeerAllowedToUseIdentity(peerConnection, peerMessage,
-                                          ownerIdentityId);
+        return isPeerAllowedToUseIdentity(peerContext, ownerIdentityId);
     }
 
     /*!
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @returns true, if the peer is the Keychain Widget, false otherwise.
      */
-    bool isPeerKeychainWidget(const QDBusConnection &peerConnection,
-                              const QDBusMessage &peerMessage);
+    bool isPeerKeychainWidget(const PeerContext &peerContext);
 
     /*!
      * Looks up for the application identifier of a specific client process.
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @returns the application identifier of the process, or an empty string
      * if none found.
      */
-    QString appIdOfPeer(const QDBusConnection &peerConnection,
-                        const QDBusMessage &peerMessage);
+    QString appIdOfPeer(const PeerContext &peerContext);
 
     /*!
      * Checks if a client process is allowed to access objects with a certain
      * security context.
      * The access type to be checked depends on the concrete implementation of
      * this function.
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @param securityContext, the securityContext to be checked against.
      * @returns true, if the peer is allowed, false otherwise.
      */
-    bool isPeerAllowedToAccess(const QDBusConnection &peerConnection,
-                               const QDBusMessage &peerMessage,
+    bool isPeerAllowedToAccess(const PeerContext &peerContext,
                                const QString securityContext);
 
     /*!
@@ -172,18 +151,15 @@ public:
      * the list with a certain security context.
      * The access type to be checked depends on the concrete implementation of
      * this function.
-     * @param peerConnection the connection over which the message was sent.
-     * @param peerMessage, the request message sent over DBUS by the process.
+     * @param peerContext the peer connection over which the message was sent.
      * @param secContexts, the objects' securityContexts to be checked against.
      * @returns true, if the peer is allowed, false otherwise.
      */
-    bool peerHasOneOfAccesses(const QDBusConnection &peerConnection,
-                              const QDBusMessage &peerMessage,
+    bool peerHasOneOfAccesses(const PeerContext &peerContext,
                               const QStringList secContexts);
 
     SignOn::AccessReply *
-        requestAccessToIdentity(const QDBusConnection &peerConnection,
-                                const QDBusMessage &peerMessage,
+        requestAccessToIdentity(const PeerContext &peerContext,
                                 quint32 id);
 
 private:

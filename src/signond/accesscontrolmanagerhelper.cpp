@@ -64,8 +64,7 @@ AccessControlManagerHelper::~AccessControlManagerHelper()
 
 
 bool AccessControlManagerHelper::isPeerAllowedToUseIdentity(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage,
+                                       const PeerContext &peerContext,
                                        const quint32 identityId)
 {
     // TODO - improve this, the error handling and more precise behaviour
@@ -87,7 +86,7 @@ bool AccessControlManagerHelper::isPeerAllowedToUseIdentity(
         return false;
 
     IdentityOwnership ownership =
-        isPeerOwnerOfIdentity(peerConnection, peerMessage, identityId);
+        isPeerOwnerOfIdentity(peerContext, identityId);
     if (ownership == ApplicationIsOwner)
         return true;
 
@@ -97,13 +96,12 @@ bool AccessControlManagerHelper::isPeerAllowedToUseIdentity(
     if (acl.contains(QLatin1String("*")))
         return true;
 
-    return peerHasOneOfAccesses(peerConnection, peerMessage, acl);
+    return peerHasOneOfAccesses(peerContext, acl);
 }
 
 AccessControlManagerHelper::IdentityOwnership
 AccessControlManagerHelper::isPeerOwnerOfIdentity(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage,
+                                       const PeerContext &peerContext,
                                        const quint32 identityId)
 {
     CredentialsDB *db = CredentialsAccessManager::instance()->credentialsDB();
@@ -119,38 +117,37 @@ AccessControlManagerHelper::isPeerOwnerOfIdentity(
     if (ownerSecContexts.isEmpty())
         return IdentityDoesNotHaveOwner;
 
-    return peerHasOneOfAccesses(peerConnection, peerMessage, ownerSecContexts) ?
+    return peerHasOneOfAccesses(peerContext, ownerSecContexts) ?
         ApplicationIsOwner : ApplicationIsNotOwner;
 }
 
 bool
 AccessControlManagerHelper::isPeerKeychainWidget(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage)
+                                       const PeerContext &peerContext)
 {
     static QString keychainWidgetAppId = m_acManager->keychainWidgetAppId();
-    QString peerAppId = appIdOfPeer(peerConnection, peerMessage);
+    QString peerAppId = appIdOfPeer(peerContext);
     return (peerAppId == keychainWidgetAppId);
 }
 
 QString AccessControlManagerHelper::appIdOfPeer(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage)
+                                       const PeerContext &peerContext)
 {
-    TRACE() << m_acManager->appIdOfPeer(peerConnection, peerMessage);
-    return m_acManager->appIdOfPeer(peerConnection, peerMessage);
+    TRACE() << m_acManager->appIdOfPeer(peerContext.connection(),
+                                        peerContext.message());
+    return m_acManager->appIdOfPeer(peerContext.connection(),
+                                    peerContext.message());
 }
 
 bool
 AccessControlManagerHelper::peerHasOneOfAccesses(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage,
+                                       const PeerContext &peerContext,
                                        const QStringList secContexts)
 {
     foreach(QString securityContext, secContexts)
     {
         TRACE() << securityContext;
-        if (isPeerAllowedToAccess(peerConnection, peerMessage, securityContext))
+        if (isPeerAllowedToAccess(peerContext, securityContext))
             return true;
     }
 
@@ -160,29 +157,22 @@ AccessControlManagerHelper::peerHasOneOfAccesses(
 
 bool
 AccessControlManagerHelper::isPeerAllowedToAccess(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage,
+                                       const PeerContext &peerContext,
                                        const QString securityContext)
 {
     TRACE() << securityContext;
-    return m_acManager->isPeerAllowedToAccess(peerConnection, peerMessage,
+    return m_acManager->isPeerAllowedToAccess(peerContext.connection(),
+                                              peerContext.message(),
                                               securityContext);
 }
 
-pid_t AccessControlManagerHelper::pidOfPeer(const QDBusContext &peerContext)
+pid_t AccessControlManagerHelper::pidOfPeer(const PeerContext &peerContext)
 {
-    return pidOfPeer(peerContext.connection(), peerContext.message());
-}
-
-pid_t AccessControlManagerHelper::pidOfPeer(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage)
-{
-    QString service = peerMessage.service();
+    QString service = peerContext.message().service();
     if (service.isEmpty()) {
 #ifdef ENABLE_P2P
         DBusConnection *connection =
-            (DBusConnection *)peerConnection.internalPointer();
+            (DBusConnection *)peerContext.connection().internalPointer();
         unsigned long pid = 0;
         dbus_bool_t ok = dbus_connection_get_unix_process_id(connection,
                                                              &pid);
@@ -196,18 +186,17 @@ pid_t AccessControlManagerHelper::pidOfPeer(
         return 0;
 #endif
     } else {
-        return peerConnection.interface()->servicePid(service).value();
+        return peerContext.connection().interface()->servicePid(service).value();
     }
 }
 
 SignOn::AccessReply *
 AccessControlManagerHelper::requestAccessToIdentity(
-                                       const QDBusConnection &peerConnection,
-                                       const QDBusMessage &peerMessage,
+                                       const PeerContext &peerContext,
                                        quint32 id)
 {
     SignOn::AccessRequest request;
-    request.setPeer(peerConnection, peerMessage);
+    request.setPeer(peerContext.connection(), peerContext.message());
     request.setIdentity(id);
     return m_acManager->handleRequest(request);
 }

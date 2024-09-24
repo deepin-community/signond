@@ -31,7 +31,7 @@
 
 namespace SignonDaemonNS {
 
-class SignonAuthSessionAdaptor: public QDBusAbstractAdaptor
+class SignonAuthSessionAdaptor: public QObject, protected QDBusContext
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface",

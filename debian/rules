@@ -6,46 +6,35 @@
 
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
-export NO_DOCS := no
 export QMAKE_LIBDIR=/usr/lib
 export QT_SELECT=qt5
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
-DOXYGEN_VERSION := $(shell dpkg --status doxygen | grep Version | cut -f 2 -d ' ')
+DOXYGEN_VERSION = $(shell dpkg-query -Wf '$${Version}' doxygen)
 include /usr/share/dpkg/architecture.mk
 
 
 %:
-	dh $@ -Bbuild/qt5 --with pkgkde_symbolshelper
+	dh $@ --with pkgkde_symbolshelper
 
 override_dh_auto_configure:
-	mkdir -p build/qt5
-	QT_SELECT=qt5 \
-	dh_auto_configure -Bbuild/qt5 -- LIBDIR=/usr/lib/$(DEB_HOST_MULTIARCH) \
-		BUILD_DIR=build/qt5 \
+	dh_auto_configure -- LIBDIR=/usr/lib/$(DEB_HOST_MULTIARCH) \
 		CONFIG+=enable-p2p \
-		DEFINES+=QT_NO_DEBUG_OUTPUT \
-		"QMAKE_CXXFLAGS=$(CFLAGS)" ../../signon.pro
+		DEFINES+=QT_NO_DEBUG_OUTPUT
 
-override_dh_auto_build:
-	QT_SELECT=qt5 dh_auto_build -Bbuild/qt5
-
-override_dh_auto_clean:
-	dh_auto_clean -Bbuild/qt5
+execute_after_dh_auto_clean:
 	-rm src/signond/backupifadaptor.*
 
-override_dh_auto_install-arch:
-	dh_auto_install -Bbuild/qt5
-
-override_dh_install:
+execute_after_dh_auto_install:
 	rm -f debian/tmp/usr/include/signon-plugins/*example*.h
 	rm -f debian/tmp/usr/include/signon-plugins/*test*.h
 	rm -f $(CURDIR)/debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/libsignon-qt*.*a
 	rm -f $(CURDIR)/debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/signon/libexampleplugin.so
-	dh_install
+
+execute_after_dh_install-indep:
 	dh_doxygen -i
 
-override_dh_gencontrol:
-	dh_gencontrol -- -Vsignond:DoxygenVersion='$(DOXYGEN_VERSION)'
+override_dh_gencontrol-indep:
+	dh_gencontrol -i -- -Vsignond:DoxygenVersion='$(DOXYGEN_VERSION)'
 
 # as of 8.59 tests fail.
 #  SsoTestClient: "No such object path '/com/google/code/AccountsSSO/SingleSignOn'"

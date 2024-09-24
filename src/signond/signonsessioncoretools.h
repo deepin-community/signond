@@ -26,11 +26,15 @@
 
 #include <QObject>
 #include <QVariantMap>
-#include <QDBusMessage>
 
+#include "peercontext.h"
 #include "signonidentityinfo.h"
 
+#include <functional>
+
 namespace SignonDaemonNS {
+
+class Error;
 
 /*!
  * @brief Helper method which unites two variant maps.
@@ -70,18 +74,21 @@ public:
  */
 struct RequestData
 {
-    RequestData(const QDBusConnection &conn,
-                const QDBusMessage &msg,
+    typedef std::function<void(const QVariantMap &map, const Error &error)>
+        ProcessCb;
+
+    RequestData(const PeerContext &peerContext,
                 const QVariantMap &params,
                 const QString &mechanism,
-                const QString &cancelKey);
+                const QString &cancelKey,
+                const ProcessCb &callback);
 
     RequestData(const RequestData &other);
     ~RequestData();
 
 public:
-    QDBusConnection m_conn;
-    QDBusMessage m_msg;
+    PeerContext m_peerContext;
+    ProcessCb m_callback;
     QVariantMap m_params;
     QString m_mechanism;
     QString m_cancelKey;

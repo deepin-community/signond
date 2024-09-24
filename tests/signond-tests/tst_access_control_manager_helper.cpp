@@ -226,7 +226,7 @@ void AccessControlManagerHelperTest::testOwnership()
     SignonDaemonNS::AccessControlManagerHelper helper(&m_acmPlugin);
 
     AccessControlManagerHelper::IdentityOwnership ownership =
-        helper.isPeerOwnerOfIdentity(m_conn, msg, 3);
+        helper.isPeerOwnerOfIdentity(PeerContext(m_conn, msg), 3);
 
     QCOMPARE(int(ownership), expectedOwnership);
 }
@@ -311,7 +311,8 @@ void AccessControlManagerHelperTest::testIdentityAccess()
 
     SignonDaemonNS::AccessControlManagerHelper helper(&m_acmPlugin);
 
-    bool isAllowed = helper.isPeerAllowedToUseIdentity(m_conn, msg, 3);
+    bool isAllowed =
+        helper.isPeerAllowedToUseIdentity(PeerContext(m_conn, msg), 3);
 
     QCOMPARE(isAllowed, expectedIsAllowed);
 }

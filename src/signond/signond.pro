@@ -20,6 +20,9 @@ HEADERS += \
     default-crypto-manager.h \
     default-key-authorizer.h \
     default-secrets-storage.h \
+    error.h \
+    erroradapter.h \
+    peercontext.h \
     signonsessioncore.h \
     signonauthsessionadaptor.h \
     signonauthsession.h \
@@ -42,6 +45,7 @@ SOURCES += \
     default-crypto-manager.cpp \
     default-key-authorizer.cpp \
     default-secrets-storage.cpp \
+    erroradaptor.cpp \
     signonsessioncore.cpp \
     signonauthsessionadaptor.cpp \
     signonauthsession.cpp \

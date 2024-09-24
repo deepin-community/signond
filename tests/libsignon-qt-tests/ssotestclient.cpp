@@ -293,7 +293,8 @@ void SsoTestClient::storeCredentials()
 
     connect(identity, SIGNAL(credentialsStored(const quint32)),
             &m_identityResult, SLOT(credentialsStored(const quint32)));
-    connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
+    connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
+            Qt::QueuedConnection);
 
     identity->storeCredentials();
 
@@ -357,7 +358,8 @@ void SsoTestClient::storeCredentials()
 
         connect(existingIdentity, SIGNAL(credentialsStored(const quint32)),
                 &m_identityResult, SLOT(credentialsStored(const quint32)));
-        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
+        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
+                Qt::QueuedConnection);
 
         existingIdentity->storeCredentials(updateInfo);
         qDebug();
@@ -372,7 +374,8 @@ void SsoTestClient::storeCredentials()
 
     if (m_identityResult.m_responseReceived == TestIdentityResult::NormalResp) {
         QEventLoop loop;
-        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
+        connect(&m_identityResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
+                Qt::QueuedConnection);
         connect(existingIdentity, SIGNAL(info(const SignOn::IdentityInfo &)),
                 &m_identityResult, SLOT(info(const SignOn::IdentityInfo &)));
 
@@ -1207,7 +1210,8 @@ void SsoTestClient::queryMethods()
     connect(&service, SIGNAL(error(const SignOn::Error &)),
             &m_serviceResult, SLOT(error(const SignOn::Error &)));
 
-    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
+    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
+            Qt::QueuedConnection);
 
     service.queryMethods();
 
@@ -1251,7 +1255,8 @@ void SsoTestClient::queryMechanisms()
     connect(&service, SIGNAL(error(const SignOn::Error &)),
             &m_serviceResult, SLOT(error(const SignOn::Error &)));
 
-    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()));
+    connect(&m_serviceResult, SIGNAL(testCompleted()), &loop, SLOT(quit()),
+            Qt::QueuedConnection);
 
     service.queryMechanisms(m_methodToQueryMechanisms);
 
@@ -1615,7 +1620,7 @@ void SsoTestClient::emptyPasswordRegression()
     const char *infoSignature = SIGNAL(info(const SignOn::IdentityInfo &));
     connect(identity, infoSignature,
             &m_identityResult, SLOT(info(const SignOn::IdentityInfo &)));
-    connect(identity, infoSignature, &loop, SLOT(quit()));
+    connect(identity, infoSignature, &loop, SLOT(quit()), Qt::QueuedConnection);
 
     identity->queryInfo();
 

@@ -66,13 +66,13 @@ StoreOperation::~StoreOperation()
 
 /* --------------------- RequestData ---------------------- */
 
-RequestData::RequestData(const QDBusConnection &conn,
-                         const QDBusMessage &msg,
+RequestData::RequestData(const PeerContext &peerContext,
                          const QVariantMap &params,
                          const QString &mechanism,
-                         const QString &cancelKey):
-    m_conn(conn),
-    m_msg(msg),
+                         const QString &cancelKey,
+                         const ProcessCb &callback):
+    m_peerContext(peerContext),
+    m_callback(callback),
     m_params(params),
     m_mechanism(mechanism),
     m_cancelKey(cancelKey)
@@ -80,8 +80,8 @@ RequestData::RequestData(const QDBusConnection &conn,
 }
 
 RequestData::RequestData(const RequestData &other):
-    m_conn(other.m_conn),
-    m_msg(other.m_msg),
+    m_peerContext(other.m_peerContext),
+    m_callback(other.m_callback),
     m_params(other.m_params),
     m_mechanism(other.m_mechanism),
     m_cancelKey(other.m_cancelKey)

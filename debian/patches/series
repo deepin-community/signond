@@ -1,4 +1,1 @@
 drop_qt_tags_tagfiles.diff
-fix_broken_test_with_qt5.15.diff
-remove-unnecessary-qmake-options.diff
-dont-use-no-rtti.diff

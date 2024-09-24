@@ -1,8 +1,26 @@
-signond (8.60-4) UNRELEASED; urgency=medium
+signond (8.61-1) unstable; urgency=medium
 
-  * update
+  * Team upload.
+  * Update standards version to 4.6.0, no changes needed.
+  * Update the patches:
+    - drop_qt_tags_tagfiles.diff: refresh
+    - fix_broken_test_with_qt5.15.diff: drop, backported from upstream
+    - remove-unnecessary-qmake-options.diff: drop, backported from upstream
+    - dont-use-no-rtti.diff: drop, backported from upstream
+  * Update symbols files. (Closes: #997439)
+  * Stop specifying a build directory, use the default one.
+  * Stop passing a custom QMAKE_CXXFLAGS to qmake, as it is already properly
+    set by dh_auto_configure.
+  * Limit the dh_gencontrol override to indep packages, as the added substvar
+    is in arch:all packages only.
+  * Remove the bits from debian/tmp during the dh_auto_install phase, rather
+    than the dh_install one.
+  * Use the execute_after_* hooks to avoid invoking dh_* manually.
+  * Execute dh_doxygen only for indep packages.
+  * Stop exporting NO_DOCS in rules, as it is not used anymore.
+  * Use dpkg-query to get the version of doxygen, and turn the query as lazy.
 
- -- Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>  Mon, 06 Jun 2022 19:26:24 +0800
+ -- Pino Toscano <pino@debian.org>  Fri, 11 Mar 2022 23:02:33 +0100
 
 signond (8.60-4) unstable; urgency=medium
 
