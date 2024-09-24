@@ -35,12 +35,16 @@
 #include "signondisposable.h"
 #include "signonsessioncoretools.h"
 
+#include <functional>
+
 using namespace SignOn;
 
 class SignonUiAdaptor;
 
 namespace SignonDaemonNS {
 
+class Error;
+class PeerContext;
 class SignonDaemon;
 
 /*!
@@ -67,14 +71,17 @@ public:
 
     void destroy();
 
+    typedef std::function<void(const QVariantMap &map, const Error &error)>
+        ProcessCb;
+
 public Q_SLOTS:
     QStringList queryAvailableMechanisms(const QStringList &wantedMechanisms);
 
-    void process(const QDBusConnection &connection,
-                 const QDBusMessage &message,
+    void process(const PeerContext &peerContext,
                  const QVariantMap &sessionDataVa,
                  const QString &mechanism,
-                 const QString &cancelKey);
+                 const QString &cancelKey,
+                 const ProcessCb &callback);
 
     void cancel(const QString &cancelKey);
     void setId(quint32 id);
@@ -116,8 +123,7 @@ protected:
 
 private:
     void startProcess();
-    void replyError(const QDBusConnection &conn,
-                    const QDBusMessage &msg,
+    void replyError(const RequestData &request,
                     int err,
                     const QString &message);
     void processStoreOperation(const StoreOperation &operation);

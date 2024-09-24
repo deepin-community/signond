@@ -309,7 +309,7 @@ QString SqlDatabase::errorInfo(const QSqlError &error)
     stream << errType;
     stream << "\n\tDatabase text: " << error.databaseText();
     stream << "\n\tDriver text: " << error.driverText();
-    stream << "\n\tNumber: " << error.number();
+    stream << "\n\tError code: " << error.nativeErrorCode();
 
     return text;
 }

@@ -3,8 +3,6 @@ TARGET = signon-passwordplugin-tests
 QT += core \
     network \
     testlib
-CONFIG += \
-    link_pkgconfig
 
 DEFINES += SIGNON_PLUGIN_TRACE
 
@@ -18,6 +16,3 @@ INCLUDEPATH += $${TOP_SRC_DIR}/lib/plugins \
     $${TOP_SRC_DIR}/src/plugins/password \
     $${TOP_SRC_DIR}/src/plugins \
     $${TOP_SRC_DIR}/lib
-
-QMAKE_CXXFLAGS += -fno-exceptions \
-    -fno-rtti

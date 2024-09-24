@@ -122,10 +122,10 @@ public:
     int authSessionTimeout() const;
 
 public:
-    QObject *registerNewIdentity();
-    QObject *getIdentity(const quint32 id, QVariantMap &identityData);
-    QObject *getAuthSession(const quint32 id, const QString type,
-                            pid_t ownerPid);
+    SignonIdentity *registerNewIdentity();
+    SignonIdentity *getIdentity(const quint32 id, QVariantMap &identityData);
+    SignonAuthSession *getAuthSession(const quint32 id, const QString type,
+                                      pid_t ownerPid);
 
     QStringList queryMethods();
     QStringList queryMechanisms(const QString &method);

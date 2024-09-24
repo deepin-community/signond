@@ -55,7 +55,8 @@ void TimeoutsTest::identityTimeout()
 {
     QEventLoop loop;
     QTimer::singleShot(test_timeout, &loop, SLOT(quit()));
-    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()));
+    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()),
+                     Qt::QueuedConnection);
 
     QMap<MethodName,MechanismsList> methods;
     methods.insert("dummy", QStringList() << "mech1" << "mech2");
@@ -130,7 +131,8 @@ void TimeoutsTest::identityRegisterTwice()
 {
     QEventLoop loop;
     QTimer::singleShot(test_timeout, &loop, SLOT(quit()));
-    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()));
+    QObject::connect(this, SIGNAL(finished()), &loop, SLOT(quit()),
+                     Qt::QueuedConnection);
 
     QMap<MethodName,MechanismsList> methods;
     methods.insert("dummy", QStringList() << "mech1" << "mech2");

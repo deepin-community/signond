@@ -1,9 +1,7 @@
-# SymbolsHelper-Confirmed: 8.60 amd64 armel armhf ia64
+# SymbolsHelper-Confirmed: 8.61 amd64 i386
 libsignon-plugins-common.so.1 libsignon-plugins-common1 #MINVER#
 * Build-Depends-Package: signond-plugins-dev
  _Z23expandDBusArgumentValueRK8QVariantPb@Base 8.57+20150423
- (arch=amd64 ia64)_ZN10QByteArrayD1Ev@Base 8.60-4
- (arch=amd64 ia64)_ZN10QByteArrayD2Ev@Base 8.60-4
  (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperI13QDBusArgumentLb1EE8DestructEPv@Base 8.57+20150423
  (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperI13QDBusArgumentLb1EE9ConstructEPvPKv@Base 8.57+20150423
  (optional=templinst)_ZN4QMapI7QString8QVariantE13detach_helperEv@Base 8.57+20150423
@@ -27,15 +25,9 @@ libsignon-plugins-common.so.1 libsignon-plugins-common1 #MINVER#
  _ZN6SignOn13BlobIOHandlerD0Ev@Base 8.57+20150423
  _ZN6SignOn13BlobIOHandlerD1Ev@Base 8.57+20150423
  _ZN6SignOn13BlobIOHandlerD2Ev@Base 8.57+20150423
- (arch=amd64 ia64)_ZN7QStringD1Ev@Base 8.60-4
- (arch=amd64 ia64)_ZN7QStringD2Ev@Base 8.60-4
  (optional=templinst)_ZN7QVectorI10QByteArrayE6appendERKS0_@Base 8.57+20150423
  (optional=templinst)_ZN7QVectorI10QByteArrayE7reallocEi6QFlagsIN10QArrayData16AllocationOptionEE@Base 8.60
- (optional=templinst|arch=amd64)_ZN7QVectorI10QByteArrayED1Ev@Base 8.60-4
- (optional=templinst|arch=amd64)_ZN7QVectorI10QByteArrayED2Ev@Base 8.60-4
  (optional=templinst)_ZN8QMapNodeI7QString8QVariantE14destroySubTreeEv@Base 8.57+20150423
- (optional=private)_ZN9QtPrivate16StreamStateSaverD1Ev@Base 8.60-4
- (optional=private)_ZN9QtPrivate16StreamStateSaverD2Ev@Base 8.60-4
  _ZNK6SignOn13BlobIOHandler10metaObjectEv@Base 8.57+20150423
  (optional=templinst)_ZNK8QMapNodeI7QString8QVariantE4copyEP8QMapDataIS0_S1_E@Base 8.57+20150423
  _ZTIN6SignOn13BlobIOHandlerE@Base 8.60
@@ -43,8 +35,7 @@ libsignon-plugins-common.so.1 libsignon-plugins-common1 #MINVER#
  _ZTVN6SignOn13BlobIOHandlerE@Base 8.57+20150423
  (optional=templinst)_ZZN11QMetaTypeIdI13QDBusArgumentE14qt_metatype_idEvE11metatype_id@Base 8.57+20150423
 libsignon-plugins.so.1 libsignon-plugins-common1 #MINVER#
- (arch=amd64 ia64)_ZN10QByteArrayD1Ev@Base 8.60-4
- (arch=amd64 ia64)_ZN10QByteArrayD2Ev@Base 8.60-4
+* Build-Depends-Package: signond-plugins-dev
  (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn11SessionDataELb1EE8DestructEPv@Base 8.57+20150423
  (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn11SessionDataELb1EE9ConstructEPvPKv@Base 8.57+20150423
  (optional=templinst)_ZN17QtMetaTypePrivate23QMetaTypeFunctionHelperIN6SignOn13UiSessionDataELb1EE8DestructEPv@Base 8.57+20150423
@@ -64,15 +55,11 @@ libsignon-plugins.so.1 libsignon-plugins-common1 #MINVER#
  _ZN19AuthPluginInterface6resultERKN6SignOn11SessionDataE@Base 8.57+20150423
  _ZN19AuthPluginInterface7refreshERKN6SignOn13UiSessionDataE@Base 8.57+20150423
  _ZN19AuthPluginInterface9refreshedERKN6SignOn13UiSessionDataE@Base 8.57+20150423
- (optional=templinst)_ZN4QMapI7QString8QVariantEC1ERKS2_@Base 8.60-4
- (optional=templinst)_ZN4QMapI7QString8QVariantEC2ERKS2_@Base 8.60-4
  (optional=templinst)_ZN4QMapI7QString8QVariantED1Ev@Base 8.60
  (optional=templinst)_ZN4QMapI7QString8QVariantED2Ev@Base 8.60
  _ZN6SignOn5ErrorD0Ev@Base 8.57+20150423
  _ZN6SignOn5ErrorD1Ev@Base 8.57+20150423
  _ZN6SignOn5ErrorD2Ev@Base 8.57+20150423
- (arch=amd64 ia64)_ZN7QStringD1Ev@Base 8.60-4
- (arch=amd64 ia64)_ZN7QStringD2Ev@Base 8.60-4
  (optional=templinst)_ZN8QMapNodeI7QString8QVariantE14destroySubTreeEv@Base 8.57+20150423
  _ZNK19AuthPluginInterface10metaObjectEv@Base 8.57+20150423
  (optional=templinst)_ZNK8QMapNodeI7QString8QVariantE4copyEP8QMapDataIS0_S1_E@Base 8.57+20150423

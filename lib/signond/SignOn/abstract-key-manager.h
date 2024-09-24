@@ -89,7 +89,7 @@ public:
      * used or implemented in subclasses.
      */
     virtual void authorizeKey(const Key &key,
-                              const QString &message = QString::null);
+                              const QString &message = QString());
 
     /*!
      * Signond calls this method when there are no active keys. This might

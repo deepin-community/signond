@@ -70,8 +70,9 @@ private:
                             const QDBusMessage &message);
     bool handleLastError(const QDBusConnection &connection,
                          const QDBusMessage &message);
+    template <typename T>
     QDBusObjectPath registerObject(const QDBusConnection &connection,
-                                   QObject *object);
+                                   T *object);
 
 private Q_SLOTS:
     void onIdentityAccessReplyFinished();
